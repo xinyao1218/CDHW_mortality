@@ -1,0 +1,36 @@
+*==============================================================================* 
+* Project:  Mortality CDHW older adults China           					   *
+* Version:    									    				           *   
+* Date:  				                                                       *
+* Author: Xin Yao  					                                           *    
+*==============================================================================*
+
+
+* set directories 
+clear all
+set maxvar  30000
+set more off
+
+
+
+global dir "C:\Users\\yaoxin\Desktop\Mortality_CDHW_olderadults_China"
+global data "$dir/data"
+global table "$dir/table"
+global figure "$dir/figure"
+
+********************************************************************************
+*
+* Table S6: Collinearity Diagnostics of baseline
+*
+********************************************************************************
+
+********************************************************************************
+	
+use "$data/main.dta", clear
+	gen BMI=g101/((g1021/100)*(g1021/100))
+
+	
+	global control trueage sex smoke drink exercise income BMI f41 f1 RH O3 PM25
+
+	collin frequency_twsa_92_3 duration_twsa_92_3 severity_twsa_92_3 $control
+	
